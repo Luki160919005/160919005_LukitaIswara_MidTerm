@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/book_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/bookDetailFragment"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.BookDetailFragment"
+        android:label="fragment_book_detail"
+        tools:layout="@layout/fragment_book_detail" >
+        <action
+            android:id="@+id/action_bookDetailFragment_to_itemHome"
+            app:destination="@id/itemHome" />
+        <argument android:name="btitle"
+            app:argType="string" />
+        <argument
+            android:name="bauthor"
+            app:argType="string" />
+        <argument android:name="bdescription"
+            app:argType="string" />
+        <argument
+            android:name="bimage"
+            app:argType="string" />
+        <argument android:name="bisbn"
+            app:argType="string" />
+        <argument
+            android:name="bPublisher"
+            app:argType="string" />
+        <argument
+            android:name="bRating"
+            app:argType="string" />
+        <argument
+            android:name="bGenres"
+            app:argType="string" />
+        <argument
+            android:name="bDate"
+            app:argType="string" />
+        <argument
+            android:name="bQty"
+            app:argType="string" />
+        <action
+            android:id="@+id/actionDetailToReview"
+            app:destination="@id/review_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemMyBooks"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.WantToReadFragment"
+        android:label="WantToReadFragment" >
+        <action
+            android:id="@+id/action_itemMyBooks_to_itemHome"
+            app:destination="@id/itemHome" />
+        <action
+            android:id="@+id/action_itemMyBooks_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemProfile"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_itemProfile_to_itemHome"
+            app:destination="@id/itemHome" />
+        <argument
+            android:name="profileUsername"
+            app:argType="string" />
+        <argument
+            android:name="profilePicture"
+            app:argType="string" />
+        <argument android:name="profileEmail"
+            app:argType="string" />
+        <argument
+            android:name="profileAge"
+            app:argType="string" />
+        <argument android:name="profileAddress"
+            app:argType="string" />
+        <argument
+            android:name="profileGender"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/actionLoginToProfile"
+            app:destination="@id/itemProfile" />
+        <action
+            android:id="@+id/actionLoginToRegister"
+            app:destination="@id/registerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemHome"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.BookListFragment"
+        android:label="BookListFragment" >
+        <action
+            android:id="@+id/action_itemHome_to_itemProfile"
+            app:destination="@id/itemProfile" />
+        <action
+            android:id="@+id/action_itemHome_to_itemMyBooks"
+            app:destination="@id/itemMyBooks" />
+        <action
+            android:id="@+id/action_itemHome_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+        <action
+            android:id="@+id/actionHomeToexplore"
+            app:destination="@id/itemExplore" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/actionRegisterToProfile"
+            app:destination="@id/itemProfile" />
+        <action
+            android:id="@+id/actionRegisterToLogin"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/review_list"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.review_list"
+        android:label="review_list" >
+        <action
+            android:id="@+id/action_review_list_to_bookDetailFragment"
+            app:destination="@id/bookDetailFragment" />
+        <argument android:name="idReview"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemExplore"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.ExploreFragment"
+        android:label="ExploreFragment" >
+        <action
+            android:id="@+id/actionExploreHome"
+            app:destination="@id/itemHome" />
+    </fragment>
+</navigation>
