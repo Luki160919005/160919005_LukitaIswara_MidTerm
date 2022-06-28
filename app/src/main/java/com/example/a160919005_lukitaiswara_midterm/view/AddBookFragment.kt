@@ -22,10 +22,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 
 
 class AddBookFragment : Fragment() {
-
-
     private lateinit var viewModel: BookDetailViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,7 +39,7 @@ class AddBookFragment : Fragment() {
 
             var bookData = MyBooks(textAddTitle.text.toString(),textAddAuthor.text.toString(),textAddPublisher.text.toString(),textAddPhoto.text.toString()
                 ,"5",textAddDescription.text.toString(),"",textAddDate.text.toString(),textAddQty.text.toString()
-                ,"",0,0,)
+                ,"",0,1)
             Log.d("BookData: ", listOf(bookData).toString());
             viewModel.addBook(listOf(bookData))
             Toast.makeText(view.context, "Book Created", Toast.LENGTH_LONG).show()

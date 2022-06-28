@@ -10,22 +10,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a160919005_lukitaiswara_midterm.R
+import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
+import com.example.a160919005_lukitaiswara_midterm.util.buildDB
 
-import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookViewModel
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.MyBookViewModel
 import kotlinx.android.synthetic.main.fragment_book_list.*
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-/**
- * A simple [Fragment] subclass.
- * Use the [BookListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class BookListFragment : Fragment() {
-    private lateinit var viewModel: MyBookViewModel
-    private val bookListAdapter  = BookListAdapter(arrayListOf())
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +28,9 @@ class BookListFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_book_list, container, false)
     }
+
+    private lateinit var viewModel: MyBookViewModel
+    private val bookListAdapter = BookListAdapter(arrayListOf(),{ item -> viewModel.clearTask(item as MyBooks) })
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -102,4 +99,5 @@ class BookListFragment : Fragment() {
 
 
     }
+
 }

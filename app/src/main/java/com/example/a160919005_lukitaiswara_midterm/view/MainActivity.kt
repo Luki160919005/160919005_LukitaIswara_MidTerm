@@ -58,6 +58,12 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navView, navController)
         bottomNav.setupWithNavController(navController)
 
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.fragmentHost) as NavHostFragment
+        val navController = navHostFragment.navController
+        //navController = Navigation.findNavController(this, R.id.hostFragment)
+        NavigationUI.setupActionBarWithNavController(this,navController)
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -21,29 +21,29 @@ data class Book(
 @Entity
 data class MyBooks(
     @ColumnInfo(name="title")
-    var title:String?,
+    val title:String?,
     @ColumnInfo(name="author")
-    var author:String?,
+    val author:String?,
     @ColumnInfo(name="publisher")
-    var publisher:String?,
+    val publisher:String?,
     @ColumnInfo(name="photo")
-    var photo:String?,
+    val photo:String?,
     @ColumnInfo(name="rating")
-    var rating: String?,
+    val rating: String?,
     @ColumnInfo(name="description")
-    var description: String?,
+    val description: String?,
     @ColumnInfo(name="genres")
-    var genres:String?,
+    val genres:String?,
     @ColumnInfo(name="date")
-    var date:String?,
+    val date:String?,
     @ColumnInfo(name="qty")
-    var qty:String?,
+    val qty:String?,
     @ColumnInfo(name="like")
-    var like:String?,
+    val like:String?,
     @ColumnInfo(name="is_done")
-    var is_done:Int,
+    val is_done:Int,
     @ColumnInfo(name="priority")
-    var priority:Int
+    val priority:Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var ISBN:Int =0
