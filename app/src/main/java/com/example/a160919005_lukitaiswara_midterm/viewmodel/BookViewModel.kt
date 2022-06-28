@@ -9,20 +9,57 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.a160919005_lukitaiswara_midterm.model.Book
+import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
 
 import com.example.a160919005_lukitaiswara_midterm.model.UserList
 import com.example.a160919005_lukitaiswara_midterm.model.bookLists
+import com.example.a160919005_lukitaiswara_midterm.util.buildDB
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.io.FileReader
+import kotlin.coroutines.CoroutineContext
 
-class BookViewModel(application: Application): AndroidViewModel(application) {
-    val booksLD = MutableLiveData<List<Book>>()
+class BookViewModel(application: Application)
+    : AndroidViewModel(application), CoroutineScope{
+val booksLD = MutableLiveData<List<Book>>()
     val bookLoadErrorLD = MutableLiveData<Boolean>()
     val loadingLD = MutableLiveData<Boolean>()
     val TAG = "volleyTag"
 
+    val myBookLD = MutableLiveData<List<MyBooks>>()
+
+
+    private var job = Job()
+
     private var queue: RequestQueue?= null
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
+
+
+    fun myRefresh() {
+        loadingLD.value = true
+        bookLoadErrorLD.value = false
+        launch {
+            val db = buildDB(getApplication())
+
+            myBookLD.value = db.booksDao().selectAllBooks()
+        }
+    }
+    fun clearBooks(myBooks: MyBooks) {
+        launch {
+            val db = buildDB(getApplication())
+
+            db.booksDao().updateIsDone(myBooks.ISBN)
+
+            myBookLD.value = db.booksDao().selectAllBooks()
+        }
+    }
+
 
     fun refreshGenre(bookGenre:String, searchSentence:String){
 
@@ -32,7 +69,8 @@ class BookViewModel(application: Application): AndroidViewModel(application) {
 
 
         queue = Volley.newRequestQueue(getApplication())
-        var strGlobalVar = "http://192.168.100.99/myjson/book.json"
+        var strGlobalVar = "http://192.168.100.215/myjson/book.json"
+        Log.d("showvoley bookTest", strGlobalVar.toString());
 
         val stringRequest = StringRequest(
             Request.Method.GET, strGlobalVar,
@@ -84,7 +122,8 @@ class BookViewModel(application: Application): AndroidViewModel(application) {
         Log.d("showvoley", "masuk");
 
         queue = Volley.newRequestQueue(getApplication())
-        var strGlobalVar = "http://192.168.100.99/myjson/book.json"
+        var strGlobalVar = "http://192.168.100.215/myjson/book.json"
+        Log.d("showvoley bookTest", strGlobalVar.toString());
 
         val stringRequest = StringRequest(
             Request.Method.GET, strGlobalVar,

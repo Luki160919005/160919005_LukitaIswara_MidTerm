@@ -9,20 +9,53 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.a160919005_lukitaiswara_midterm.model.Book
+import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
 import com.example.a160919005_lukitaiswara_midterm.model.UserList
 import com.example.a160919005_lukitaiswara_midterm.model.bookLists
+import com.example.a160919005_lukitaiswara_midterm.util.buildDB
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class BookDetailViewModel(application: Application): AndroidViewModel(application) {
+class BookDetailViewModel(application: Application): AndroidViewModel(application), CoroutineScope {
     var bookLD = MutableLiveData<Book>()
-    /*
-    fun fetch(pid : String, pname : String, pbod : String, pphone : String, photo:String) {
-        val student1 = Student(pid, pname, pbod, pphone,photo)
-        studentLD.value = student1
-    }*/
+
     val TAG = "volleyTag"
     private var queue: RequestQueue?= null
+
+    private val job = Job()
+    val myBookLD = MutableLiveData<MyBooks>()
+
+    fun fetchBook(ISBN:Int) {
+        launch {
+            val db = buildDB(getApplication())
+            myBookLD.value =  db.booksDao().selectBooks(ISBN)
+        }
+    }
+
+
+
+    fun updateIsDone(uuid:Int){
+        launch {
+            val db = buildDB(getApplication())
+            db.booksDao().updateIsDone(uuid)
+        }
+    }
+
+    fun addBook(list:List<MyBooks>) {
+        launch {
+            val db = buildDB(getApplication())
+            db.booksDao().insertAll(*list.toTypedArray())
+        }
+    }
+
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
     fun changeLike(bISBN : String){
         queue = Volley.newRequestQueue(getApplication())
@@ -40,7 +73,7 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
         if(findBookBasedID.toString() == "null"){
 
             queue = Volley.newRequestQueue(getApplication())
-            var strGlobalVar = "http://192.168.100.99/myjson/book.json"
+            var strGlobalVar = "http://192.168.100.215/myjson/book.json"
 
 
 
@@ -91,7 +124,7 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
 
 
         queue = Volley.newRequestQueue(getApplication())
-        var strGlobalVar = "http://192.168.100.99/myjson/book.json"
+        var strGlobalVar = "http://192.168.100.215/myjson/book.json"
 
 
 

@@ -108,6 +108,12 @@
         <action
             android:id="@+id/actionHomeToexplore"
             app:destination="@id/itemExplore" />
+        <action
+            android:id="@+id/action_itemHome_self"
+            app:destination="@id/itemHome" />
+        <action
+            android:id="@+id/actionAddBook"
+            app:destination="@id/addBookFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -137,6 +143,15 @@
         android:label="ExploreFragment" >
         <action
             android:id="@+id/actionExploreHome"
+            app:destination="@id/itemHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBookFragment"
+        android:name="com.example.a160919005_lukitaiswara_midterm.view.AddBookFragment"
+        android:label="fragment_add_book"
+        tools:layout="@layout/fragment_add_book" >
+        <action
+            android:id="@+id/action_addBookFragment_to_itemHome"
             app:destination="@id/itemHome" />
     </fragment>
 </navigation>

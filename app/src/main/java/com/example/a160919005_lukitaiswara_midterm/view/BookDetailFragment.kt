@@ -6,32 +6,44 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.a160919005_lukitaiswara_midterm.R
+import com.example.a160919005_lukitaiswara_midterm.databinding.FragmentBookDetailBinding
+import com.example.a160919005_lukitaiswara_midterm.model.Book
+import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
 import com.example.a160919005_lukitaiswara_midterm.util.loadImage2
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookDetailViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 import java.util.concurrent.TimeUnit
 
 
-class BookDetailFragment : Fragment() {
+
+class BookDetailFragment : Fragment(), ButtonCreateNotification {
 
     private lateinit var viewModel: BookDetailViewModel
-
+    private lateinit var binding: FragmentBookDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_detail, container, false)
+        binding.listenerNotification = this
+        return binding.root
         return inflater.inflate(R.layout.fragment_book_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        /*
         var bisbn = ""
         var bauthor = ""
         var btitle = ""
@@ -56,6 +68,12 @@ class BookDetailFragment : Fragment() {
             bQty = BookDetailFragmentArgs.fromBundle(requireArguments()).bQty
         }
 
+        */
+        var bisbn = ""
+        if(arguments != null) {
+            bisbn     = BookDetailFragmentArgs.fromBundle(requireArguments()).bisbn
+        }
+
         viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
         viewModel.fetch(bisbn)
         observeViewModel()
@@ -71,6 +89,7 @@ class BookDetailFragment : Fragment() {
 
     }
 
+    var bookName = "";
     fun observeViewModel() {
         Log.d("showvoley","masuk")
         Log.d("showvoley","masuk:"+viewModel.bookLD.value?.ISBN)
@@ -88,6 +107,39 @@ class BookDetailFragment : Fragment() {
         })
 
 
+
+        viewModel.bookLD.observe(viewLifecycleOwner, Observer {
+            Log.d("showtag2",it.toString())
+
+            /*val bookDetailData = MyBooks(it.ISBN.toString(), it.title.toString(),it.author.toString(),it.publisher.toString(),it.photo.toString()
+            , it.rating.toString(), it.description.toString(), it.genres.toString(), it.date.toString(), it.qty.toString()
+            , it.like.toString())*/
+
+
+
+            //binding.bookDetail = it
+
+            bookName = it.title.toString()
+
+
+
+
+        })
+
+
+    }
+
+    override fun onButtonCreateNotification(v: View) {
+        Log.d("showcek", "create notif")
+        Observable.timer(5, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.d("Messages", "five seconds")
+                MainActivity.showNotification(bookName,
+                    "A new notification created",
+                    R.drawable.ic_baseline_person_24)
+            }
     }
 
 

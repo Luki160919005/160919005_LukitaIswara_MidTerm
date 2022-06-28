@@ -9,9 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a160919005_lukitaiswara_midterm.R
+
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookViewModel
 import kotlinx.android.synthetic.main.fragment_book_list.*
-import kotlinx.android.synthetic.main.fragment_book_list.refreshLayout
+
 import kotlinx.android.synthetic.main.fragment_want_to_read.*
 
 // TODO: Rename parameter arguments, choose names that match

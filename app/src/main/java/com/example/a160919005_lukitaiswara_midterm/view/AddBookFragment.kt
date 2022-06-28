@@ -7,11 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.app.AlertDialog;
+import android.util.Log
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.a160919005_lukitaiswara_midterm.R
+import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
 import com.example.a160919005_lukitaiswara_midterm.model.UserList
+import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookDetailViewModel
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookViewModel
 import kotlinx.android.synthetic.main.fragment_add_book.*
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -20,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 class AddBookFragment : Fragment() {
 
 
-    private lateinit var viewModel: BookViewModel
+    private lateinit var viewModel: BookDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,75 +36,20 @@ class AddBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var dialogBuilder = AlertDialog.Builder(getActivity())
-
+        viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
 
         buttonAddBook.setOnClickListener {
 
-            if(UserList.globalUsername.equals("admin")) {
-
-                val isbn = textAddISBN.text.toString()
-                val title = textAddTitle.text.toString()
-                val author = textAddAuthor.text.toString()
-                val publisher = textAddPublisher.text.toString()
-                val photo = textAddPhoto.text.toString()
-                val description = textAddDescription.text.toString()
-                val genre = textAddGenre.text.toString()
-                val date = textAddDate.text.toString()
-                val qty = textAddQty.text.toString()
-
-                if((isbn.equals(""))||(title.equals(""))||(author.equals(""))||(publisher.equals(""))
-                    ||(publisher.equals(""))||(photo.equals(""))||(description.equals(""))||(genre.equals(""))
-                    ||(date.equals(""))||(qty.equals(""))){
-
-                    // set message of alert dialog
-                    dialogBuilder.setMessage("Input Must Not be empty")
-                        // if the dialog is cancelable
-                        .setCancelable(false)
-                        // positive button text and action
-
-                        // negative button text and action
-                        .setNegativeButton("Cancel", DialogInterface.OnClickListener {
-                                dialog, id -> dialog.cancel()
-                        })
-
-                    // create dialog box
-                    val alert = dialogBuilder.create()
-                    // set title for alert dialog box
-                    alert.setTitle("Warning")
-                    // show alert dialog
-                    alert.show()
-
-                }
-
-            }
-            else{
-
-
-
-                // set message of alert dialog
-                dialogBuilder.setMessage("This application can only be access by Admin")
-                    // if the dialog is cancelable
-                    .setCancelable(false)
-                    // positive button text and action
-
-                    // negative button text and action
-                    .setNegativeButton("Cancel", DialogInterface.OnClickListener {
-                            dialog, id -> dialog.cancel()
-                    })
-
-                // create dialog box
-                val alert = dialogBuilder.create()
-                // set title for alert dialog box
-                alert.setTitle("Warning")
-                // show alert dialog
-                alert.show()
-            }
-
-
-
-
+            var bookData = MyBooks(textAddTitle.text.toString(),textAddAuthor.text.toString(),textAddPublisher.text.toString(),textAddPhoto.text.toString()
+                ,"5",textAddDescription.text.toString(),"",textAddDate.text.toString(),textAddQty.text.toString()
+                ,"",0,0,)
+            Log.d("BookData: ", listOf(bookData).toString());
+            viewModel.addBook(listOf(bookData))
+            Toast.makeText(view.context, "Book Created", Toast.LENGTH_LONG).show()
+            Navigation.findNavController(it).popBackStack()
         }
+
+
 
 
 

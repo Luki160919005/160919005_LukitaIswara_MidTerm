@@ -5,16 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a160919005_lukitaiswara_midterm.R
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookViewModel
-import kotlinx.android.synthetic.main.fragment_book_list.*
 import kotlinx.android.synthetic.main.fragment_explore.*
-import kotlinx.android.synthetic.main.fragment_want_to_read.*
 import kotlinx.android.synthetic.main.fragment_want_to_read.refreshLayout
 
 
