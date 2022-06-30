@@ -20,35 +20,31 @@ class UserViewModel (application: Application): AndroidViewModel(application) {
     fun searchUser(uName : String, uPassword:String):Boolean {
 
         queue = Volley.newRequestQueue(getApplication())
-
-
         var mUser = UserList()
         var strGlobal = "["+UserList.globalUser+"]"
-        Log.d("showuser url", strGlobal)
+//        Log.d("showuser url", strGlobal)
         Log.d("showuser name", uName)
         Log.d("showuser pass", uPassword)
         val sType = object : TypeToken<List<User>>() { }.type
 
-        Log.d("showuser type", sType.toString())
-        Log.d("showuser type", uPassword)
+//        Log.d("showuser type", sType.toString())
+//        Log.d("showuser type", uPassword)
 
         val result = Gson().fromJson<List<User>>(strGlobal, sType)
 
-
         Log.d("showuser res", result.toString())
+        Log.d("showuser res length ", result.size.toString())
+
 
         val findUser = result.find{(it.username.equals(uName))&&(it.password.equals(uPassword))}
         Log.d("showuser find", findUser.toString())
         if(findUser.toString() != "null"){
             UserList.globalUsername = uName.toString();
-
             return true
         }
         else{
             return false
         }
-
-
     }
 
     fun searchUserInfo(uName : String): List<User> {

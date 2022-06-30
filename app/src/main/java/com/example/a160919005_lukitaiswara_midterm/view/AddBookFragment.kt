@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.fragment_register.*
 
 class AddBookFragment : Fragment() {
     private lateinit var viewModel: BookDetailViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

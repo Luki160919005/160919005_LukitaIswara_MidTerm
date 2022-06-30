@@ -37,9 +37,15 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
         }
     }
 
-
+    fun changeLikeBook(ISBN:Int) {
+        launch {
+            val db = buildDB(getApplication())
+            db.booksDao().updateBooksLike("1",ISBN)
+        }
+    }
 
     fun updateIsDone(uuid:Int){
+        Log.d("checkString Delete", uuid.toString())
         launch {
             val db = buildDB(getApplication())
             db.booksDao().updateIsDone(uuid)
@@ -118,6 +124,13 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
 
 
 
+    }
+    fun update(title:String, author:String, publisher:String,photo:String,rating:String,
+               description:String,date:String,qty:String,isbn:Int){
+        launch {
+            val db = buildDB(getApplication())
+            db.booksDao().update(title,author,publisher,photo,rating,description, date, qty, isbn)
+        }
     }
 
     fun fetch(pid : String) {

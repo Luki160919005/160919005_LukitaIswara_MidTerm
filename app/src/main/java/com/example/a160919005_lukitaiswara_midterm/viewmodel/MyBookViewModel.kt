@@ -36,19 +36,31 @@ class MyBookViewModel(application: Application)
         bookLoadErrorLD.value = false
         launch {
             val db = buildDB(getApplication())
-
             myBookLD.value = db.booksDao().selectAllBooks()
         }
     }
+
+    fun addBook(list:List<MyBooks>) {
+        launch {
+            val db = buildDB(getApplication())
+            db.booksDao().insertAll(*list.toTypedArray())
+        }
+    }
+
+    fun refreshLike() {
+        loadingLD.value = true
+        bookLoadErrorLD.value = false
+        launch {
+            val db = buildDB(getApplication())
+            myBookLD.value = db.booksDao().selecsBooksLike()
+        }
+    }
+
     fun clearTask(myBooks: MyBooks) {
         launch {
             val db = buildDB(getApplication())
-
             db.booksDao().updateIsDone(myBooks.ISBN)
-
             myBookLD.value = db.booksDao().selectAllBooks()
         }
     }
-
-
 }

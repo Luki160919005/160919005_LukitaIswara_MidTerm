@@ -3,20 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/drawable/ic_baseline_book_24.xml" value="0.1835" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/book_list_item.xml" value="0.2" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_add_book.xml" value="0.264" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_book_detail.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_book_list.xml" value="0.2" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_explore.xml" value="0.264" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_login.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_register.xml" value="0.19947916666666668" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_review_list.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_review_list_item.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_want_to_read.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/menu/bottom_menu.xml" value="0.16" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.15" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/activity_main.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/book_list_item.xml" value="0.264" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_add_book.xml" value="0.1" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_book_detail.xml" value="0.1984375" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_book_list.xml" value="0.1984375" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_edit_book.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_review_list.xml" value="0.1890625" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_review_list_item.xml" value="0.1984375" />
+        <entry key="..\:/Users/1luki/160919005_LukitaIswara_MidTerm/app/src/main/res/layout/fragment_want_to_read.xml" value="0.1796875" />
       </map>
     </option>
   </component>

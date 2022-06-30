@@ -3,6 +3,82 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
+@Entity
+data class MyBooks(
+    @ColumnInfo(name="title")
+    var title:String?,
+    @ColumnInfo(name="author")
+    var author:String?,
+    @ColumnInfo(name="publisher")
+    var publisher:String?,
+    @ColumnInfo(name="photo")
+    var photo:String?,
+    @ColumnInfo(name="rating")
+    var rating: String?,
+    @ColumnInfo(name="description")
+    var description: String?,
+    @ColumnInfo(name="genres")
+    var genres:String?,
+    @ColumnInfo(name="date")
+    var date:String?,
+    @ColumnInfo(name="qty")
+    var qty:String?,
+    @ColumnInfo(name="likeBook")
+    var likeBook:String?,
+    @ColumnInfo(name="is_done")
+    var is_done:Int,
+    @ColumnInfo(name="priority")
+    var priority:Int
+) {
+    @PrimaryKey(autoGenerate = true)
+    var ISBN:Int =0
+}
+
+@Entity
+data class MyReview(
+    @ColumnInfo(name="myUser")
+    var myUser:String?,
+    @ColumnInfo(name="whichISBN")
+    var whichISBN:Int?,
+    @ColumnInfo(name="reviewInfo")
+    var reviewInfo:String?,
+    @ColumnInfo(name="profImage")
+    var profImage:String?,
+    @ColumnInfo(name="is_done")
+    var is_done:Int,
+    @ColumnInfo(name="priority")
+    var priority:Int
+) {
+    @PrimaryKey(autoGenerate = true)
+    var idReview:Int =0
+}
+
+@Entity
+data class MyUser(
+    @ColumnInfo(name="username")
+    var username:String?,
+    @ColumnInfo(name="password")
+    var password:String?,
+    @ColumnInfo(name="profilePic")
+    var profilePic:String?,
+    @ColumnInfo(name="age")
+    var age:String?,
+    @ColumnInfo(name="email")
+    var email:String?,
+    @ColumnInfo(name="address")
+    var address:String?,
+    @ColumnInfo(name="Gender")
+    var Gender:String?,
+    @ColumnInfo(name="is_done")
+    var is_done:Int,
+    @ColumnInfo(name="priority")
+    var priority:Int
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id:Int =0
+}
+
 data class Book(
     val ISBN:String?,
     val title:String?,
@@ -17,38 +93,6 @@ data class Book(
     val like:String?
 )
 
-
-@Entity
-data class MyBooks(
-    @ColumnInfo(name="title")
-    val title:String?,
-    @ColumnInfo(name="author")
-    val author:String?,
-    @ColumnInfo(name="publisher")
-    val publisher:String?,
-    @ColumnInfo(name="photo")
-    val photo:String?,
-    @ColumnInfo(name="rating")
-    val rating: String?,
-    @ColumnInfo(name="description")
-    val description: String?,
-    @ColumnInfo(name="genres")
-    val genres:String?,
-    @ColumnInfo(name="date")
-    val date:String?,
-    @ColumnInfo(name="qty")
-    val qty:String?,
-    @ColumnInfo(name="like")
-    val like:String?,
-    @ColumnInfo(name="is_done")
-    val is_done:Int,
-    @ColumnInfo(name="priority")
-    val priority:Int
-) {
-    @PrimaryKey(autoGenerate = true)
-    var ISBN:Int =0
-}
-
 data class BooktDetail(
     val ISBN:String?,
     val title:String?,
@@ -61,11 +105,9 @@ data class BooktDetail(
     val date:String?,
     val qty:String?,
     val like:String?
-
 )
 
 data class User(
-
     var username:String?,
     var password:String?,
     var profilePic:String?,
@@ -73,23 +115,16 @@ data class User(
     var email:String?,
     var address:String?,
     var Gender:String?
-
 )
 
-
-
 data class Review(
-
     var myUser:String?,
     var whichISBN:String?,
     var reviewInfo:String?,
     var profImage:String?
-
 )
 
 public class myNewUser(var name: String, private var password: String, var profilePic: String, var userEmail: String) {
-
-
     @JvmName("setName1")
     fun setName(name: String) {
         this.name = name
@@ -120,5 +155,4 @@ public class myNewUser(var name: String, private var password: String, var profi
     fun getEmail(): String {
         return userEmail
     }
-
 }

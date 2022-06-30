@@ -1,6 +1,7 @@
 package com.example.a160919005_lukitaiswara_midterm.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,8 @@ import kotlinx.coroutines.launch
 
 class BookListFragment : Fragment() {
 
+    private lateinit var viewModel: MyBookViewModel
+    private val bookListAdapter = BookListAdapter(arrayListOf(),{ item -> viewModel.clearTask(item as MyBooks) })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,26 +32,20 @@ class BookListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_book_list, container, false)
     }
 
-    private lateinit var viewModel: MyBookViewModel
-    private val bookListAdapter = BookListAdapter(arrayListOf(),{ item -> viewModel.clearTask(item as MyBooks) })
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(MyBookViewModel::class.java)
         viewModel.refresh()
 
-
         revycleViewBookList.layoutManager = LinearLayoutManager(context)
         revycleViewBookList.adapter = bookListAdapter
-
 
         refreshLayoutBookList.setOnRefreshListener {
             revycleViewBookList.visibility = View.GONE
             textErrorBookList.visibility = View.GONE
             progressLoadBookList.visibility = View.VISIBLE
             viewModel.refresh()
-
             refreshLayoutBookList.isRefreshing = false
         }
 
@@ -61,43 +58,38 @@ class BookListFragment : Fragment() {
     }
 
     fun observeViewModel() {
+        Log.d("showbook", "masuk observeviewmodel")
         viewModel.myBookLD.observe(viewLifecycleOwner, Observer {
+            Log.d("showbook", "observe 1")
+            Log.d("showbook", "panjang = " + it.size)
             bookListAdapter.updateBookList(it)
 
             if(it.isEmpty()) {
                 textEmpty.visibility = View.VISIBLE
             } else {
+                revycleViewBookList.visibility = View.VISIBLE
+                textErrorBookList.visibility = View.GONE
+                progressLoadBookList.visibility = View.GONE
                 textEmpty.visibility = View.GONE
             }
-
-
-
         })
 
-        viewModel.bookLoadErrorLD.observe(viewLifecycleOwner, Observer {
-            if(it == true) {
-                textErrorBookList.visibility = View.VISIBLE
-            } else {
-                textErrorBookList.visibility = View.GONE
-            }
-        })
-
-        viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
-            if(it) {
-                revycleViewBookList.visibility = View.GONE
-                progressLoadBookList.visibility = View.VISIBLE
-            } else {
-                revycleViewBookList.visibility = View.VISIBLE
-                progressLoadBookList.visibility = View.GONE
-
-
-            }
-        })
-
-
-
-
-
+//        viewModel.bookLoadErrorLD.observe(viewLifecycleOwner, Observer {
+//            if(it == true) {
+//                textErrorBookList.visibility = View.VISIBLE
+//            } else {
+//                textErrorBookList.visibility = View.GONE
+//            }
+//        })
+//
+//        viewModel.loadingLD.observe(viewLifecycleOwner, Observer {
+//            if(it) {
+//                revycleViewBookList.visibility = View.GONE
+//                progressLoadBookList.visibility = View.VISIBLE
+//            } else {
+//                revycleViewBookList.visibility = View.VISIBLE
+//                progressLoadBookList.visibility = View.GONE
+//            }
+//        })
     }
-
 }

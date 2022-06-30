@@ -9,8 +9,12 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.a160919005_lukitaiswara_midterm.R
+import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
+import com.example.a160919005_lukitaiswara_midterm.model.MyUser
 import com.example.a160919005_lukitaiswara_midterm.model.UserList
+import com.example.a160919005_lukitaiswara_midterm.viewmodel.MyUserViewModel
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.fragment_add_book.*
 import kotlinx.android.synthetic.main.fragment_explore.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register.*
@@ -26,7 +30,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RegisterFragment : Fragment() {
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: MyUserViewModel
 
 
     // TODO: Rename and change types of parameters
@@ -58,11 +62,15 @@ class RegisterFragment : Fragment() {
                 checkGender ="Female";
             }
 
-            viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-            viewModel.addUser(name,password,picture,age,email,address,checkGender)
+            viewModel = ViewModelProvider(this).get(MyUserViewModel::class.java)
+
+            var userData = MyUser(name,password,picture,age,email,address,checkGender,0,0)
 
 
+            viewModel.addUser(listOf(userData))
 
+
+            /*
             var userDataMod= viewModel.searchUserInfo(name)
             Log.d("showuser data", userDataMod[0].username.toString())
 
@@ -71,7 +79,8 @@ class RegisterFragment : Fragment() {
 
             val action = RegisterFragmentDirections.actionRegisterToProfile( userDataMod[0].username.toString(),
                 userDataMod[0].profilePic.toString(),userDataMod[0].email.toString(),userDataMod[0].age.toString(),
-                userDataMod[0].address.toString(),userDataMod[0].Gender.toString())
+                userDataMod[0].address.toString(),userDataMod[0].Gender.toString())*/
+            val action = RegisterFragmentDirections.actionRegisterToLogin()
             Navigation.findNavController(it).navigate(action)
 
 

@@ -20,9 +20,5 @@ class bookLists : Application() {
                 "qty": 5,
                 "like": 0
             }"""
-
-
     }
-
-
 }

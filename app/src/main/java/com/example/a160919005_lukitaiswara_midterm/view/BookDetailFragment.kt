@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.a160919005_lukitaiswara_midterm.R
 import com.example.a160919005_lukitaiswara_midterm.databinding.FragmentBookDetailBinding
-import com.example.a160919005_lukitaiswara_midterm.model.Book
-import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
+import com.example.a160919005_lukitaiswara_midterm.databinding.FragmentEditBookBinding
 import com.example.a160919005_lukitaiswara_midterm.util.loadImage2
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookDetailViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_book_detail.*
+import kotlinx.android.synthetic.main.fragment_edit_book.*
 import java.util.concurrent.TimeUnit
 
 
@@ -29,15 +29,16 @@ class BookDetailFragment : Fragment(), ButtonCreateNotification {
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var binding: FragmentBookDetailBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_detail, container, false)
-        binding.listenerNotification = this
+        //binding = DataBindingUtil.inflate(inflater, R.layout.fragment_book_detail, container, false)
+        //binding.listenerNotification = this
+        binding = DataBindingUtil.inflate<FragmentBookDetailBinding>(inflater,R.layout.fragment_book_detail,container,false)
         return binding.root
-        return inflater.inflate(R.layout.fragment_book_detail, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,20 +70,24 @@ class BookDetailFragment : Fragment(), ButtonCreateNotification {
         }
 
         */
-        var bisbn = ""
+        var bisbn = 0
         if(arguments != null) {
-            bisbn     = BookDetailFragmentArgs.fromBundle(requireArguments()).bisbn
+            bisbn     = BookDetailFragmentArgs.fromBundle(requireArguments()).detailISBN
         }
 
+
         viewModel = ViewModelProvider(this).get(BookDetailViewModel::class.java)
-        viewModel.fetch(bisbn)
+        viewModel.fetchBook(bisbn)
         observeViewModel()
 
         buttonWantToRead.setOnClickListener {
-            viewModel.changeLike(bisbn)
+            viewModel.changeLikeBook(bisbn)
+            val action = BookDetailFragmentDirections.actionDetailToWantToRead()
+            Navigation.findNavController(it).navigate(action)
+
         }
         buttonDetailReview.setOnClickListener {
-            val action = BookDetailFragmentDirections.actionDetailToReview(bisbn)
+            val action = BookDetailFragmentDirections.actionBookDetailFragmentToReviewList(bisbn.toString())
             Navigation.findNavController(it).navigate(action)
         }
 
@@ -91,8 +96,15 @@ class BookDetailFragment : Fragment(), ButtonCreateNotification {
 
     var bookName = "";
     fun observeViewModel() {
+        viewModel.myBookLD.observe(viewLifecycleOwner, Observer {
+            binding.bookDetail = it
+            bookName = it.title.toString()
+
+        })
+
         Log.d("showvoley","masuk")
         Log.d("showvoley","masuk:"+viewModel.bookLD.value?.ISBN)
+        /*
         viewModel.bookLD.observe(viewLifecycleOwner, Observer {
             Log.d("showvoley","id:"+it.publisher.toString())
             textDetailAuthor.setText(it.author.toString())
@@ -104,10 +116,10 @@ class BookDetailFragment : Fragment(), ButtonCreateNotification {
 
 
 
-        })
+        })*/
 
 
-
+        /*
         viewModel.bookLD.observe(viewLifecycleOwner, Observer {
             Log.d("showtag2",it.toString())
 
@@ -124,7 +136,7 @@ class BookDetailFragment : Fragment(), ButtonCreateNotification {
 
 
 
-        })
+        })*/
 
 
     }

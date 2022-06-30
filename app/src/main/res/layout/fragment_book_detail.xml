@@ -8,9 +8,7 @@
         <variable
             name="bookDetail"
             type="com.example.a160919005_lukitaiswara_midterm.model.MyBooks" />
-        <variable
-            name="listenerUpdate"
-            type="com.example.a160919005_lukitaiswara_midterm.view.ButtonUpdate" />
+
         <variable
             name="listenerNotification"
             type="com.example.a160919005_lukitaiswara_midterm.view.ButtonCreateNotification" />

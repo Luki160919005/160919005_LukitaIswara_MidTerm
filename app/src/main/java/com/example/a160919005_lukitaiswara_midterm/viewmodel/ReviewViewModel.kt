@@ -25,7 +25,6 @@ class ReviewViewModel(application: Application): AndroidViewModel(application)  
         loadingLD.value = true
 
 
-
         var strGlobalVar = "["+ ReviewList.globalReview+"]"
 
 

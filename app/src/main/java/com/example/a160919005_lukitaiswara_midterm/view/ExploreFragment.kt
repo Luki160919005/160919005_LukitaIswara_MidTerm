@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a160919005_lukitaiswara_midterm.R
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookViewModel
 import kotlinx.android.synthetic.main.fragment_explore.*
-import kotlinx.android.synthetic.main.fragment_want_to_read.refreshLayout
+
 
 
 class ExploreFragment : Fragment() {
 
     private lateinit var viewModel: BookViewModel
-    private val wantListAdapter  = wantToReadAdapter(arrayListOf())
+    //private val wantListAdapter  = wantToReadAdapter(arrayListOf())
 
 
     override fun onCreateView(
@@ -49,6 +49,7 @@ class ExploreFragment : Fragment() {
             if(radioHistory.isChecked){
                 checkGenre ="History";
             }
+            /*
             Log.d("showvoley check", checkGenre.toString());
             viewModel = ViewModelProvider(this).get(BookViewModel::class.java)
             viewModel.refreshGenre(checkGenre.toString(), search.toString())
@@ -63,7 +64,7 @@ class ExploreFragment : Fragment() {
                 refreshLayout.isRefreshing = false
             }
 
-            observeViewModel()
+            observeViewModel()*/
         }
 
 
@@ -74,6 +75,7 @@ class ExploreFragment : Fragment() {
 
 
     fun observeViewModel() {
+        /*
         viewModel.booksLD.observe(viewLifecycleOwner, Observer {
             wantListAdapter.updateBookListLike(it)
         })
@@ -96,7 +98,7 @@ class ExploreFragment : Fragment() {
 
 
             }
-        })
+        })*/
     }
 
 
