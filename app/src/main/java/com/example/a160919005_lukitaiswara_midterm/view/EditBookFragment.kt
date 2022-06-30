@@ -14,8 +14,12 @@ import com.example.a160919005_lukitaiswara_midterm.databinding.FragmentEditBookB
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookDetailViewModel
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_add_book.*
 import kotlinx.android.synthetic.main.fragment_edit_book.*
+import java.util.concurrent.TimeUnit
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,7 +27,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class EditBookFragment : Fragment() {
+class EditBookFragment : Fragment(), ButtonCreateNotification {
     // TODO: Rename and change types of parameters
     private lateinit var viewModel: BookDetailViewModel
     private lateinit var dataBinding: FragmentEditBookBinding
@@ -33,6 +37,7 @@ class EditBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         dataBinding = DataBindingUtil.inflate<FragmentEditBookBinding>(inflater,R.layout.fragment_edit_book,container,false)
+        dataBinding.listenerNotification = this
         return dataBinding.root
     }
 
@@ -57,11 +62,12 @@ class EditBookFragment : Fragment() {
         observeViewModel()
 
     }
-
+    var bookName = "";
     fun observeViewModel() {
         viewModel.myBookLD.observe(viewLifecycleOwner, Observer {
             dataBinding.books = it
             if(it.is_done == 0){
+                bookName = it.title.toString()
 
                 textEditTitle.setText(it.title)
                 textEditAuthor.setText(it.author)
@@ -75,6 +81,19 @@ class EditBookFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onButtonCreateNotification(v: View) {
+        Log.d("showcek", "create notif")
+        Observable.timer(5, TimeUnit.SECONDS)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.d("Messages", "five seconds")
+                MainActivity.showNotification(bookName,
+                    "A new notification created",
+                    R.drawable.ic_baseline_person_24)
+            }
     }
 
 

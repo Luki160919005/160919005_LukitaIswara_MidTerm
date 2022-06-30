@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.CompoundButton
 import androidx.lifecycle.ViewModelProvider
 import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
+import com.example.a160919005_lukitaiswara_midterm.model.MyReview
 
 interface ButtonDetailClickListener{
     fun onButtonDetailClick(v: View)
@@ -29,6 +30,10 @@ interface ButtonAddReviewListener {
 
 interface TodoCheckedChangeListerner {
     fun onTodoCheckedChange(cb: CompoundButton, isChecked: Boolean, obj: MyBooks)
+}
+
+interface TodoCheckedChangeListernerReview {
+    fun onTodoCheckedChange(cb: CompoundButton, isChecked: Boolean, obj: MyReview)
 }
 
 interface ButtonCreateNotification{

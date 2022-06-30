@@ -37,6 +37,14 @@ class MyReviewViewModel (application: Application)
         }
     }
 
+    fun updateIsDone(uuid:Int){
+        Log.d("checkString Delete", uuid.toString())
+        launch {
+            val db = buildDB(getApplication())
+            db.reviewsDao().updateIsDone(uuid)
+        }
+    }
+
 
     fun addReview(list:List<MyReview>) {
         launch {

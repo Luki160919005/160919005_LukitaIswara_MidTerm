@@ -8,6 +8,10 @@
             name="reviews"
             type="com.example.a160919005_lukitaiswara_midterm.model.MyReview" />
 
+        <variable
+            name="listenerCheck"
+            type="com.example.a160919005_lukitaiswara_midterm.view.TodoCheckedChangeListernerReview" />
+
 
 
     </data>
@@ -28,6 +32,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <CheckBox
+                android:id="@+id/checkTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onCheckedChanged="@{(cb, isChecked) -> listenerCheck.onTodoCheckedChange(cb, isChecked, reviews)}"
+
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                 />
+
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="97dp"
@@ -45,8 +60,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView3"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView

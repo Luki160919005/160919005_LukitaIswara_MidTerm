@@ -15,5 +15,8 @@ interface ReviewsDao {
     @Query("SELECT * FROM myReview WHERE whichISBN= :whichISBN")
     suspend fun selecReview(whichISBN:Int): List<MyReview>
 
+    @Query("UPDATE myReview SET is_done=1 WHERE idReview=:id")
+    suspend fun updateIsDone( id:Int)
+
 
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.a160919005_lukitaiswara_midterm.R
 import com.example.a160919005_lukitaiswara_midterm.model.MyBooks
@@ -52,7 +53,7 @@ class LoginFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
-    var check = false
+    private var check = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -91,7 +92,9 @@ class LoginFragment : Fragment() {
             observeViewModel()
 
             if(check==true){
-                Log.d("showuser", "berhasil login sudahan2")
+                check=false
+                Navigation.findNavController(it).navigate(action)
+            //Log.d("showuser", "berhasil login sudahan2")
             }
         }
 
@@ -105,6 +108,9 @@ class LoginFragment : Fragment() {
         revycleViewBookList.adapter = bookListAdapter
         observeViewModel()*/
     }
+
+    var action = LoginFragmentDirections.actionLoginToProfile("","","","","","")
+
     fun observeViewModel() {
         viewModel.returnReadAllData.observe(viewLifecycleOwner, Observer {
             if(it != null) {
@@ -118,11 +124,11 @@ class LoginFragment : Fragment() {
                 //var userDataMod= viewModel.searchUserInfo(name)
                 //Log.d("showuser data", it[0]..toString())
 
-                val action = LoginFragmentDirections.actionLoginToProfile( it[0].username.toString(),
-                    it[0].profilePic.toString(),it[0].email.toString(),it[0].age.toString(),
-                    it[0].address.toString(),it[0].Gender.toString())
+
+
+
                 //Navigation.findNavController(it).navigate(action)
-                check = true
+
                 if(it[0].username.toString() == "initialTest") {
                     val BooksGenerator = listOf(
                         MyBooks(
@@ -209,7 +215,17 @@ class LoginFragment : Fragment() {
                     )
                     viewModel.addUser(UsernameGenerator)
                 }
-                view?.findNavController()?.navigate(action)
+
+
+                action = LoginFragmentDirections.actionLoginToProfile( it[0].username.toString(),
+                    it[0].profilePic.toString(),it[0].email.toString(),it[0].age.toString(),
+                    it[0].address.toString(),it[0].Gender.toString())
+
+
+                //check = true
+                //view?.let { it1 -> Navigation.findNavController(it1).navigate(action) }
+                this.findNavController().navigate(action)
+
 
 //                val action = LoginFragmentDirections.actionLoginToProfile( it[0].username.toString(),
 //                    it[0].profilePic.toString(),it[0].email.toString(),it[0].age.toString(),
@@ -244,4 +260,6 @@ class LoginFragment : Fragment() {
         })*/
     }*/
 }
+
+
 

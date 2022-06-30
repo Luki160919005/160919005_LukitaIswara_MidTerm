@@ -17,6 +17,7 @@ import com.example.a160919005_lukitaiswara_midterm.model.Review
 
 import com.example.a160919005_lukitaiswara_midterm.util.loadImage2
 import com.example.a160919005_lukitaiswara_midterm.viewmodel.BookDetailViewModel
+import com.example.a160919005_lukitaiswara_midterm.viewmodel.MyReviewViewModel
 import kotlinx.android.synthetic.main.book_list_item.view.*
 import kotlinx.android.synthetic.main.fragment_review_list_item.view.*
 
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_review_list_item.view.*
 
 class ReviewListAdapter(val reviewList:ArrayList<MyReview>, val adapterOnClick : (MyReview) -> Unit)
     :RecyclerView.Adapter<ReviewListAdapter.ReviewViewHolder>(),
-    TodoCheckedChangeListerner {
+    TodoCheckedChangeListernerReview {
     class ReviewViewHolder(var view: FragmentReviewListItemBinding): RecyclerView.ViewHolder(view.root)
 
 
@@ -58,7 +59,11 @@ class ReviewListAdapter(val reviewList:ArrayList<MyReview>, val adapterOnClick :
         notifyDataSetChanged()
     }
 
-    override fun onTodoCheckedChange(cb: CompoundButton, isChecked: Boolean, obj: MyBooks) {
-        TODO("Not yet implemented")
+    private lateinit var viewModel: MyReviewViewModel
+
+    override fun onTodoCheckedChange(cb: CompoundButton, isChecked: Boolean, obj: MyReview) {
+        if(isChecked) {
+            adapterOnClick(obj)
+        }
     }
 }
