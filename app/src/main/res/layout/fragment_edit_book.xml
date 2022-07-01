@@ -40,14 +40,14 @@
                 android:layout_weight="1"
                 android:text="Edit"
                 app:layout_constraintEnd_toEndOf="@+id/textInputQty"
-                app:layout_constraintTop_toBottomOf="@+id/textInputQty" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputPriority" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Add Book"
+                android:text="Edit Book"
                 android:textSize="34sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -201,10 +201,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:text="Notification"
                 android:onClick="@{listenerNotification::onButtonCreateNotification}"
+                android:text="Notification"
                 app:layout_constraintStart_toStartOf="@+id/textInputQty"
-                app:layout_constraintTop_toBottomOf="@+id/textInputQty" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputPriority" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputPriority"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/textInputQty"
+                app:layout_constraintStart_toStartOf="@+id/textInputQty"
+                app:layout_constraintTop_toBottomOf="@+id/textInputQty">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textPriority"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:hint="Priority" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

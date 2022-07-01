@@ -126,10 +126,10 @@ class BookDetailViewModel(application: Application): AndroidViewModel(applicatio
 
     }
     fun update(title:String, author:String, publisher:String,photo:String,rating:String,
-               description:String,date:String,qty:String,isbn:Int){
+               description:String,date:String,qty:String,isbn:Int,prior:Int){
         launch {
             val db = buildDB(getApplication())
-            db.booksDao().update(title,author,publisher,photo,rating,description, date, qty, isbn)
+            db.booksDao().update(title,author,publisher,photo,rating,description, date, qty, isbn,prior)
         }
     }
 

@@ -53,7 +53,7 @@ class EditBookFragment : Fragment(), ButtonCreateNotification {
             viewModel.update(textEditTitle.text.toString(),textEditAuthor.text.toString(),
                 texEditPublisher.text.toString(),textEditPhoto.text.toString()
                 ,"5",textEditDescription.text.toString(),textEditDate.text.toString(),textEditQty.text.toString(),
-                isbn)
+                isbn,textPriority.text.toString().toInt())
             Toast.makeText(view.context, "Book updated", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(it).popBackStack()
         }
@@ -76,6 +76,7 @@ class EditBookFragment : Fragment(), ButtonCreateNotification {
                 textEditDescription.setText(it.description)
                 textEditQty.setText(it.qty)
                 textEditDate.setText(it.date)
+                textPriority.setText((it.priority).toString())
 
 
             }
